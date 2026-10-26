@@ -3,7 +3,7 @@ from .database import engine
 from time import time
 import psycopg2
 from psycopg2.extras import RealDictCursor
-from .routers import user
+from .routers import auth, post, user
 
 
 while True:
@@ -21,6 +21,8 @@ while True:
 
 app = FastAPI(title="Smart Task Management API")
 app.include_router(user.router)
+app.include_router(auth.router)
+app.include_router(post.router)
 
 
 @app.get("/")
