@@ -47,4 +47,4 @@ class Task(Base):
         nullable=False,
         server_default=func.now(),
     )
-    due_date = Column(DateTime(timezone=True), nullable=True)
+    due_date = Column(DateTime(timezone=True), nullable=False)

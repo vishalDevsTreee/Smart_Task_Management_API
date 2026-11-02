@@ -13,7 +13,7 @@ class TaskCreate(BaseModel):
     description: Optional[str] = None
     status: ProjectStatus = ProjectStatus.PENDING
     priority: ProjectPriority = ProjectPriority.MEDIUM
-    due_date: Optional[datetime] = None
+    due_date: datetime
 
 
 class TaskResponse(BaseModel):
@@ -25,7 +25,7 @@ class TaskResponse(BaseModel):
     project_id: int
     owner_id: int
     created_at: datetime
-    due_date: datetime | None
+    due_date: datetime 
 
     class Config:
         from_attributes = True
