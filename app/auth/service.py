@@ -6,6 +6,16 @@ from app.core import security
 from app.database import get_db
 
 def create_user(data, db):
+    existing_user = db.query(models.User).filter(
+        models.User.email == data.email
+    ).first()
+
+    if existing_user:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail="User Already Exists",
+        )
+
     hashed_password = security.hash(data.password)
     data.password = hashed_password
     new_user =models.User(
@@ -13,9 +23,6 @@ def create_user(data, db):
         email =data.email,
         password =hashed_password
     )
-    if new_user:
-        raise HTTPException(status_code=status.HTTP_409_CONFLICT,
-                            detail=f"User Already Exists")
     
     db.add(new_user)
     db.commit()

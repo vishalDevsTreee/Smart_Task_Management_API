@@ -13,7 +13,7 @@ class Project(Base):
     description = Column(String, nullable=True)
     owner_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
     status = Column(String(20), nullable=False, server_default="active")
-    due_date = Column(DateTime, nullable=True)
+    due_date = Column(DateTime, nullable=False)
     created_at = Column(DateTime(timezone=True), nullable=False, server_default=func.now())
     updated_at = Column(
         DateTime(timezone=True),

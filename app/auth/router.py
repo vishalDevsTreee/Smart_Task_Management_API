@@ -19,6 +19,6 @@ def create_user(user: schemas.UserCreate,
 @router.post("/login", response_model=schemas.Token)
 def login(
     user_credentials: OAuth2PasswordRequestForm = Depends(),
-    db: Session = Depends(get_db)
-):
+    db: Session = Depends(get_db)):
+    
     return service.login(user_credentials, db)
